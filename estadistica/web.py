@@ -15,11 +15,11 @@ def url_for(tipo,filename):
 def responder(pedido_json):
     pedido=json.loads(pedido_json)
     modulo=pedido.get('modulo','muestra')
-    if modulo not in ('muestra','hipotesis','interpolacion','guia'):modulo='muestra'
+    if modulo not in ('muestra','hipotesis','interpolacion'):modulo='muestra'
     config=pantalla(modulo,pedido.get('variante',''))
     valores=pedido.get('datos') or {}
     resultado=None;grafico=None;error=None
-    if pedido.get('calcular') and modulo!='guia':
+    if pedido.get('calcular'):
         try:
             resultado={'muestra':muestra,'hipotesis':hipotesis,'interpolacion':interpolacion}[modulo](valores)
             grafico=crear_grafico(resultado['grafico'])
